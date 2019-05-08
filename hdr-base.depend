@@ -1,0 +1,114 @@
+# depslib dependency file v1.0
+1475628233 source:/home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	"opengl.h"
+	"rgbe.h"
+
+1300995668 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/include/GL/glut.h
+	"freeglut.h"
+
+1300995668 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/include/GL/freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1300995668 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/include/GL/freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1300995668 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/include/GL/freeglut_ext.h
+
+1472593460 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/rgbe.h
+	<stdio.h>
+
+1475628294 source:/home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/rgbe.c
+	"rgbe.h"
+	<math.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1475628249 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/opengl.h
+	<windows.h>
+	"gl/glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdio.h>
+	<stdlib.h>
+
+1475628262 source:/home/PORTOALEGRE/10049190/git/progswb2/trab/t2-162/hdrvis/opengl.c
+	"opengl.h"
+
+1475703452 source:/home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/main.c
+	<math.h>
+	<string.h>
+	"opengl.h"
+
+1475703386 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/opengl.h
+	<windows.h>
+	"gl/glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdio.h>
+	<stdlib.h>
+
+1300995668 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/include/GL/glut.h
+	"freeglut.h"
+
+1300995668 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/include/GL/freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1300995668 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/include/GL/freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1300995668 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/include/GL/freeglut_ext.h
+
+1475703437 source:/home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/opengl.c
+	"opengl.h"
+
+1475628294 source:/home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/rgbe.c
+	"rgbe.h"
+	<math.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1472593460 /home/PORTOALEGRE/10049190/git/progswb2/trab/t2bn-162-87y233fvjsijcb43/hdrvis/rgbe.h
+	<stdio.h>
+
+1554735762 source:/home/10049190/Downloads/hdrvis/main.c
+	<math.h>
+	<string.h>
+	"opengl.h"
+
+1554678770 /home/10049190/Downloads/hdrvis/opengl.h
+	<windows.h>
+	"gl/glut.h"
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdio.h>
+	<stdlib.h>
+
+1554678770 /home/10049190/Downloads/hdrvis/include/GL/glut.h
+	"freeglut.h"
+
+1554678770 /home/10049190/Downloads/hdrvis/include/GL/freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1554678770 /home/10049190/Downloads/hdrvis/include/GL/freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1554678770 /home/10049190/Downloads/hdrvis/include/GL/freeglut_ext.h
+
+1554678770 source:/home/10049190/Downloads/hdrvis/opengl.c
+	"opengl.h"
+

@@ -10,9 +10,6 @@ void carregaHeader(FILE* fp);
 void carregaImagem(FILE* fp, int largura, int altura);
 void criaImagensTeste();
 
-//
-// Variáveis globais a serem utilizadas (NÃO ALTERAR!)
-//
 
 // Dimensões da imagem de entrada
 int sizeX, sizeY;
@@ -37,16 +34,47 @@ void process()
     //
     // EXEMPLO: preenche a imagem com pixels cor de laranja...
     //
+    int totalPixels = (sizeX * sizeY)*4;
+    unsigned char* ptrOrgImg = image;
+
+    unsigned int R;
+    unsigned int G;
+    unsigned int B;
+    unsigned int m;
+    float f_r;
+    float f_g;
+    float f_b;
+    //for (int i = 0; i < totalPixels; i+=4)
+    for (int i = 0; i < 32; i+=4)
+    {
+
+
+        R = image[i];
+        G = image[i+1];
+        B = image[i+2];
+        m = image[i+3];
+        printf("RGB m: %02X %02X %02X %02X", R, G, B, m);
+
+
+        int pot = m - 136;
+        float c = pow(2, pot );
+        //printf("\n valor do c: %f ", c);
+        f_r = R * c;
+        f_g = G * c;
+        f_b = B * c;
+        //printf("\n RGB (%f,%f,%f)", f_r, f_g , f_b);
+    }
+    
+  
     //
     // SUBSTITUA este código pelos algoritmos a serem implementados
     //
     unsigned char* ptr = image8;
     int totalBytes = sizeX * sizeY * 3; // RGB = 3 bytes por pixel
     for(int pos=0; pos<totalBytes; pos+=3) {
-        // Gera tons de LARANJA, de acordo com o fator de exposição
-        *ptr++ = (unsigned char) (255 * exposure);
-        *ptr++ = (unsigned char) (127 * exposure);
-        *ptr++ = (unsigned char) (0 * exposure);
+        *ptr++ = (unsigned char) (f_r * exposure);
+        *ptr++ = (unsigned char) (f_g * exposure);
+        *ptr++ = (unsigned char) (f_b * exposure);
     }
 
     //
@@ -55,79 +83,6 @@ void process()
     buildTex();
 }
 
-int main(int argc, char** argv)
-{
-    if(argc==1) {
-        printf("hdrvis [image file.hdf]\n");
-        exit(1);
-    }
-
-    // Inicialização da janela gráfica
-    init(argc,argv);
-
-    //
-    // PASSO 1: Leitura da imagem
-    // A leitura do header já foi feita abaixo
-    // 
-    FILE* arq = fopen(argv[1], "rb");
-    carregaHeader(arq);
-
-    //
-    // IMPLEMENTE AQUI o código necessário para
-    // extrair as informações de largura e altura do header
-    //
-    printf("HDR: ");
-    for(int i=0; i<11; i++)
-    {
-        printf(" %u ", header[i]);
-    }
-    printf("\n");
-
-
-    printf("size of unsigned char: %d", sizeof(unsigned char));
-
-
-    unsigned int width = 64*header[3] + 32*header[4] + 16*header[5] + header[6];
-    printf("width: %u", width);
-    unsigned int height = 1000*header[7] + 100*header[8] + 10*header[9] + header[10];
-
-    //carregaImagem(arq, width, height);
-
-
-
-
-
-
-
-
-    // Descomente a linha abaixo APENAS quando isso estiver funcionando!
-    //
-    //carregaImagem(arq, minhaLargura, minhaAltura);
-    //carregaImagem(arq, 200, 300);
-    
-    // Fecha o arquivo
-    fclose(arq);
-
-    //
-    // COMENTE a linha abaixo quando a leitura estiver funcionando!
-    // (caso contrário, ele irá sobrepor a imagem carrega com a imagem de teste)
-    //
-    //criaImagensTeste();
-
-    exposure = 1.0f; // exposição inicial
-
-    // Aplica processamento inicial
-    process();
-
-    // Não retorna... a partir daqui, interação via teclado e mouse apenas, na janela gráfica
-
-    // Mouse wheel é usada para aproximar/afastar
-    // Setas direita e esquerda ajustam o fator de exposição
-   
-    glutMainLoop();
-
-    return 0;
-}
 
 // Função apenas para a criação de uma imagem em memória, com o objetivo
 // de testar a funcionalidade de exibição e controle de exposição do programa
@@ -177,3 +132,57 @@ void carregaImagem(FILE* fp, int largura, int altura)
     }
 }
 
+int main(int argc, char** argv)
+{
+    if(argc==1) {
+        printf("hdrvis [image file.hdf]\n");
+        exit(1);
+    }
+    // Inicialização da janela gráfica
+    init(argc,argv);
+
+    FILE* arq = fopen(argv[1], "rb");
+    carregaHeader(arq);
+
+    printf("HDR: ");
+    for(int i=0; i<11; i++)
+    {
+        printf(" %u ", header[i]);
+    }
+    printf("\n");
+
+    // Cálculo da largura da imagem em pixels
+    unsigned long int width = 0;
+    width = (header[6] << 24) | (header[5] << 16) | (header[4] << 8) | (header[3]);
+    printf("width: %u \n", width);
+
+    // Cálculo da altura da imagem em pixels
+    unsigned int height = 0;
+    height = (header[10] << 24) | (header[9] << 16) | (header[8] << 8) | (header[7]);
+    printf("height: %u \n", height);
+
+    carregaImagem(arq, width, height);
+
+    // Fecha o arquivo
+    fclose(arq);
+
+    //
+    // COMENTE a linha abaixo quando a leitura estiver funcionando!
+    // (caso contrário, ele irá sobrepor a imagem carrega com a imagem de teste)
+    //
+    //criaImagensTeste();
+
+    exposure = 1.0f; // exposição inicial
+
+    // Aplica processamento inicial
+    process();
+
+    // Não retorna... a partir daqui, interação via teclado e mouse apenas, na janela gráfica
+
+    // Mouse wheel é usada para aproximar/afastar
+    // Setas direita e esquerda ajustam o fator de exposição
+   
+    glutMainLoop();
+
+    return 0;
+}

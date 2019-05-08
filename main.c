@@ -41,11 +41,16 @@ void process()
     unsigned int G;
     unsigned int B;
     unsigned int m;
-    float f_r;
-    float f_g;
-    float f_b;
-    //for (int i = 0; i < totalPixels; i+=4)
-    for (int i = 0; i < 32; i+=4)
+    float* Rptr;
+    float* Gptr;
+    float* Bptr;
+    Rptr = malloc(sizeof(float) * (totalPixels/4));
+    Gptr = malloc(sizeof(float) * (totalPixels/4));
+    Bptr = malloc(sizeof(float) * (totalPixels/4));
+
+    int count = 0;
+    for (int i = 0; i < totalPixels; i+=4)
+    //for (int i = 0; i < 32; i+=4)
     {
 
 
@@ -53,28 +58,39 @@ void process()
         G = image[i+1];
         B = image[i+2];
         m = image[i+3];
-        printf("RGB m: %02X %02X %02X %02X", R, G, B, m);
+        //printf("RGB m: %02X %02X %02X %02X", R, G, B, m);
 
 
         int pot = m - 136;
         float c = pow(2, pot );
         //printf("\n valor do c: %f ", c);
-        f_r = R * c;
-        f_g = G * c;
-        f_b = B * c;
+        *Rptr++ = R * c;
+        *Gptr++ = G * c;
+        *Bptr++ = B * c;
+        count ++;
         //printf("\n RGB (%f,%f,%f)", f_r, f_g , f_b);
     }
+
+    Rptr -= count;
+    Gptr -= count;
+    Bptr -= count;
+
     
   
-    //
-    // SUBSTITUA este código pelos algoritmos a serem implementados
-    //
     unsigned char* ptr = image8;
     int totalBytes = sizeX * sizeY * 3; // RGB = 3 bytes por pixel
-    for(int pos=0; pos<totalBytes; pos+=3) {
-        *ptr++ = (unsigned char) (f_r * exposure);
-        *ptr++ = (unsigned char) (f_g * exposure);
-        *ptr++ = (unsigned char) (f_b * exposure);
+    for(int pos=0; pos<totalBytes; pos+=3) 
+    {
+        *ptr++ = (unsigned char) (*Rptr++ * exposure);
+        *ptr++ = (unsigned char) (*Gptr++ * exposure);
+        *ptr++ = (unsigned char) (*Bptr++ * exposure);
+    }
+    ptr = image8;
+    for(int k=0; k<totalBytes; k+=3)
+    {
+        *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
+        *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
+        *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
     }
 
     //

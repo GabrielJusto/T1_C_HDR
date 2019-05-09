@@ -81,17 +81,17 @@ void process()
     int totalBytes = sizeX * sizeY * 3; // RGB = 3 bytes por pixel
     for(int pos=0; pos<totalBytes; pos+=3) 
     {
-        *ptr++ = (unsigned char) (*Rptr++ * exposure);
-        *ptr++ = (unsigned char) (*Gptr++ * exposure);
-        *ptr++ = (unsigned char) (*Bptr++ * exposure);
+        *ptr++ = (unsigned char) (((*Rptr * exposure)/((*Rptr++ * exposure)+0.5))*255);
+        *ptr++ = (unsigned char) (((*Gptr * exposure)/((*Gptr++ * exposure)+0.5))*255);
+        *ptr++ = (unsigned char) (((*Bptr * exposure)/((*Bptr++ * exposure)+0.5))*255);
     }
     ptr = image8;
-    for(int k=0; k<totalBytes; k+=3)
-    {
-        *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
-        *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
-        *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
-    }
+    // for(int k=0; k<totalBytes; k+=3)
+    // {
+    //     *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
+    //     *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
+    //     *ptr++ = (unsigned char) ((*ptr) / ((*ptr)+0.5));
+    // }
 
     //
     // NÃO ALTERAR A PARTIR DAQUI!!!!
